@@ -28,7 +28,6 @@ public class UtilController {
 	
 	@GetMapping("/getListaProvincias")
 	public List<ResultadoList> getListaProvincias(@RequestParam(required = true) String pdepartamento){
-		//System.out.println("El valor del parametro es: " + pdepartamento);
 		return utilServiceImpl.getListaProvincias(pdepartamento);
 	}		
 	

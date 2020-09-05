@@ -24,9 +24,9 @@ public class VisionPersonaQuec {
 	private String distrito;
 	private BigDecimal latitud;
 	private BigDecimal longitud;
-	private String file_vision;
-	private String file_concepto;
-	private String file_categoria;
+	private String vision;
+	private String concepto;
+	private String categoria;
  /*   @Lob
     private byte[] file_vision;
     
@@ -58,8 +58,8 @@ public class VisionPersonaQuec {
 */
 
 	public VisionPersonaQuec(int grupoEdad, String sexo, String idioma, String departamento, String provincia,
-		String distrito, BigDecimal latitud, BigDecimal longitud, String file_vision, String file_concepto,
-		String file_categoria) {
+		String distrito, BigDecimal latitud, BigDecimal longitud, String vision, String concepto,
+		String categoria) {
 	super();
 	this.grupoEdad = grupoEdad;
 	this.sexo = sexo;
@@ -69,9 +69,9 @@ public class VisionPersonaQuec {
 	this.distrito = distrito;
 	this.latitud = latitud;
 	this.longitud = longitud;
-	this.file_vision = file_vision;
-	this.file_concepto = file_concepto;
-	this.file_categoria = file_categoria;
+	this.vision = vision;
+	this.concepto = concepto;
+	this.categoria = categoria;
 }
 	
 	public int getGrupoEdad() {
@@ -137,36 +137,36 @@ public class VisionPersonaQuec {
 		this.longitud = longitud;
 	}
 
-	public String getFile_vision() {
-		return file_vision;
+	public String getVision() {
+		return vision;
 	}
 
-	public void setFile_vision(String file_vision) {
-		this.file_vision = file_vision;
+	public void setVision(String vision) {
+		this.vision = vision;
 	}
 
-	public String getFile_concepto() {
-		return file_concepto;
+	public String getConcepto() {
+		return concepto;
 	}
 
-	public void setFile_concepto(String file_concepto) {
-		this.file_concepto = file_concepto;
+	public void setConcepto(String concepto) {
+		this.concepto = concepto;
 	}
 
-	public String getFile_categoria() {
-		return file_categoria;
+	public String getCategoria() {
+		return categoria;
 	}
 
-	public void setFile_categoria(String file_categoria) {
-		this.file_categoria = file_categoria;
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
 	}
 
 	@Override
 	public String toString() {
 		return "VisionPersonaQuec [grupoEdad=" + grupoEdad + ", sexo=" + sexo + ", idioma=" + idioma + ", departamento="
 				+ departamento + ", provincia=" + provincia + ", distrito=" + distrito + ", latitud=" + latitud
-				+ ", longitud=" + longitud + ", file_vision=" + file_vision + ", file_concepto=" + file_concepto
-				+ ", file_categoria=" + file_categoria + "]";
+				+ ", longitud=" + longitud + ", vision=" + vision + ", concepto=" + concepto
+				+ ", categoria=" + categoria + "]";
 	}
 	
 	
