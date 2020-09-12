@@ -22,4 +22,13 @@ public interface IUtilDAO extends JpaRepository<ResultadoList, String> {
 	@Query(value = "{call sp_listar_grupoedad()}", nativeQuery = true)
 	public List<ResultadoList> getListaGrupoEdad();	
 	
+	@Query(value = "{call sp_listar_tipogrupo()}", nativeQuery = true)
+	public List<ResultadoList> getListaTipoGrupo();	
+	
+	@Query(value = "{call sp_listar_sector()}", nativeQuery = true)
+	public List<ResultadoList> getListaSector();	
+	
+	@Query(value = "{call sp_listar_categoria()}", nativeQuery = true)
+	public List<ResultadoList> getListaCategoria();		
+	
 }

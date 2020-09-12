@@ -39,6 +39,21 @@ public class UtilController {
 	@GetMapping("/getListaGrupoEdad")
 	public List<ResultadoList> getListaGrupoEdad(){
 		return utilServiceImpl.getListaGrupoEdad();
-	}		
+	}
+	
+	@GetMapping("/getListaTipoGrupo")
+	public List<ResultadoList> getListaTipoGrupo(){
+		return utilServiceImpl.getListaTipoGrupo();
+	}
+	
+	@GetMapping("/getListaSector")
+	public List<ResultadoList> getListaSector(){
+		return utilServiceImpl.getListaSector();
+	}
+	
+	@GetMapping("/getListaCategoria")
+	public List<ResultadoList> getListaCategoria(){
+		return utilServiceImpl.getListaCategoria();
+	}	
 	
 }

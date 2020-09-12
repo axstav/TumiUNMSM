@@ -33,4 +33,19 @@ public class UtilServiceImpl implements IUtilService {
 		return iutilDAO.getListaGrupoEdad();
 	}
 
+	@Override
+	public List<ResultadoList> getListaTipoGrupo() {
+		return iutilDAO.getListaTipoGrupo();
+	}
+
+	@Override
+	public List<ResultadoList> getListaSector() {
+		return iutilDAO.getListaSector();
+	}
+
+	@Override
+	public List<ResultadoList> getListaCategoria() {
+		return iutilDAO.getListaCategoria();
+	}
+
 }
