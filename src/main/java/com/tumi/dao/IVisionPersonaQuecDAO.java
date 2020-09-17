@@ -14,9 +14,9 @@ public interface IVisionPersonaQuecDAO extends JpaRepository<VisionPersonaQuec, 
 
 	@Transactional
 	@Modifying
-	@Query(value = "{call sp_registrar_personaQuec(:pgrupoEdad,:psexo,:pidioma,:pdepartamento,:pprovincia,:pdistrito,:platitud,:plongitud,:pfile_vision,:pfile_concepto,:pfile_categoria)}", nativeQuery = true)
+	@Query(value = "{call sp_registrar_personaQuec(:pgrupoEdad,:psexo,:pidioma,:pdepartamento,:pprovincia,:pdistrito,:platitud,:plongitud,:pfile_vision,:pfile_concepto,:pcategoria)}", nativeQuery = true)
 	public void registrarParticipacionPerQuec(
-			@Param("pgrupoEdad") int pgrupoEdad,
+			@Param("pgrupoEdad") String pgrupoEdad,
 			@Param("psexo") String psexo,
 			@Param("pidioma") String pidioma,
 			@Param("pdepartamento") String pdepartamento,
@@ -26,7 +26,7 @@ public interface IVisionPersonaQuecDAO extends JpaRepository<VisionPersonaQuec, 
 			@Param("plongitud") BigDecimal plongitud,
 			@Param("pfile_vision") String pfile_vision,
 			@Param("pfile_concepto") String pfile_concepto,
-			@Param("pfile_categoria") String pfile_categoria
+			@Param("pcategoria") String pcategoria
 	);
 		
 }

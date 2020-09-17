@@ -5,9 +5,24 @@ import java.util.Arrays;
 
 import javax.persistence.Entity;
 import javax.persistence.Lob;
+import javax.persistence.NamedStoredProcedureQuery;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Id;
 
 @Entity
+@NamedStoredProcedureQuery(name = "vision.registrargrupo", 
+procedureName = "sp_registrar_grupo", parameters = {
+  @StoredProcedureParameter(mode = ParameterMode.IN, name = "pnombInstitucion", type = String.class),
+  @StoredProcedureParameter(mode = ParameterMode.IN, name = "ptipoInstitucion", type = String.class),
+  @StoredProcedureParameter(mode = ParameterMode.IN, name = "psectorEconomico", type = String.class),
+  @StoredProcedureParameter(mode = ParameterMode.IN, name = "pcategoria", type = String.class),
+  @StoredProcedureParameter(mode = ParameterMode.IN, name = "platitud", type = BigDecimal.class),
+  @StoredProcedureParameter(mode = ParameterMode.IN, name = "plongitud", type = BigDecimal.class),
+  @StoredProcedureParameter(mode = ParameterMode.IN, name = "pvision", type = String.class),
+  @StoredProcedureParameter(mode = ParameterMode.IN, name = "pconcepto", type = String.class),
+  @StoredProcedureParameter(mode = ParameterMode.OUT, name = "puuid", type = String.class)
+  })
 public class VisionGrupo {
 	
 	@Id

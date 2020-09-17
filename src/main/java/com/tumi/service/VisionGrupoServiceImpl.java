@@ -1,12 +1,18 @@
 package com.tumi.service;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.tumi.dao.IVisionGrupoDAO;
+import com.tumi.dto.FileStorageProperties;
 import com.tumi.dto.VisionGrupo;
 
 @Service
@@ -15,8 +21,22 @@ public class VisionGrupoServiceImpl implements IVisionGrupoService {
 	@Autowired
 	IVisionGrupoDAO ivisionGrupoDAO;
 	
-    public int registrarParticipacionGrupo(VisionGrupo visionGrupo) {
-    	return ivisionGrupoDAO.registrarParticipacionGrupo(
+	private final Path fileStorageLocation;
+	
+    @Autowired
+    public VisionGrupoServiceImpl(FileStorageProperties fileStorageProperties) {
+        this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir())
+                .toAbsolutePath().normalize();
+
+        try {
+            Files.createDirectories(this.fileStorageLocation);
+        } catch (Exception ex) {
+            //throw new FileStorageException("Could not create the directory where the uploaded files will be stored.", ex);
+        }
+    }
+    
+    public String registrarParticipacionGrupo(VisionGrupo visionGrupo) {
+    	return ivisionGrupoDAO.registrarGrupo(
 					visionGrupo.getNombInstitucion(), 
 					visionGrupo.getTipoInstitucion(),
 					visionGrupo.getSectorEconomico(), 
@@ -24,9 +44,43 @@ public class VisionGrupoServiceImpl implements IVisionGrupoService {
 					visionGrupo.getLatitud(), 
 					visionGrupo.getLongitud(), 
 					visionGrupo.getVision(), 
-					visionGrupo.getConcepto(),
-					visionGrupo.getAdjunto());
-    }	
-	
-	
+					visionGrupo.getConcepto());
+    }    
+    
+    public void almacenarDescarga(MultipartFile file) {
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+
+        try {
+            // Check if the file's name contains invalid characters
+            if (fileName.contains("..")) {
+            	// throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
+            }
+
+            // Copy file to the target location (Replacing existing file with the same name)
+            Path targetLocation = this.fileStorageLocation.resolve(fileName);
+            Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+
+            //return fileName;
+        } catch (IOException ex) {
+           // throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
+        }
+    }
+    
+    public void registrarAdjunto(MultipartFile file,String code) {
+        // Normalize file name
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+
+        try {
+            // Check if the file's name contains invalid characters
+            if (fileName.contains("..")) {
+               // throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
+            }
+
+            ivisionGrupoDAO.registrarAdjunto(code, file.getBytes());
+
+        } catch (IOException ex) {
+           // throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
+        }
+    }
+    
 }

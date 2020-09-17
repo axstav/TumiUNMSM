@@ -1,25 +1,18 @@
 package com.tumi.dto;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 
 import javax.persistence.Entity;
-import javax.persistence.Lob;
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class VisionPersonaQuec {
-//@Id
-//@GeneratedValue(strategy=GenerationType.IDENTITY)
-//private Integer id;
-	
-	private int grupoEdad;
+
+	@Id
+	private String grupoEdad;
 	private String sexo;
 	private String idioma;
 	private String departamento;
-	@Id
 	private String provincia;
 	private String distrito;
 	private BigDecimal latitud;
@@ -27,37 +20,12 @@ public class VisionPersonaQuec {
 	private String vision;
 	private String concepto;
 	private String categoria;
- /*   @Lob
-    private byte[] file_vision;
-    
-    @Lob
-    private byte[] file_concepto;
-    
-    @Lob
-    private byte[] file_categoria;
-*/
+
 	public VisionPersonaQuec() {
 		super();
 	}
-/*
-	public VisionPersonaQuec(int grupoEdad, String sexo, String idioma, String departamento, String provincia, String distrito,
-			BigDecimal latitud, BigDecimal longitud, byte[] file_vision, byte[] file_concepto, byte[] file_categoria) {
-		super();
-		this.grupoEdad = grupoEdad;
-		this.sexo = sexo;
-		this.idioma = idioma;
-		this.departamento = departamento;
-		this.provincia = provincia;
-		this.distrito = distrito;
-		this.latitud = latitud;
-		this.longitud = longitud;
-		this.file_vision = file_vision;
-		this.file_concepto = file_concepto;
-		this.file_categoria = file_categoria;
-	}
-*/
 
-	public VisionPersonaQuec(int grupoEdad, String sexo, String idioma, String departamento, String provincia,
+	public VisionPersonaQuec(String grupoEdad, String sexo, String idioma, String departamento, String provincia,
 		String distrito, BigDecimal latitud, BigDecimal longitud, String vision, String concepto,
 		String categoria) {
 	super();
@@ -74,10 +42,10 @@ public class VisionPersonaQuec {
 	this.categoria = categoria;
 }
 	
-	public int getGrupoEdad() {
+	public String getGrupoEdad() {
 		return grupoEdad;
 	}	
-	public void setGrupoEdad(int grupoEdad) {
+	public void setGrupoEdad(String grupoEdad) {
 		this.grupoEdad = grupoEdad;
 	}
 
@@ -169,42 +137,5 @@ public class VisionPersonaQuec {
 				+ ", categoria=" + categoria + "]";
 	}
 	
-	
-	
-/*
-	public byte[] getFile_vision() {
-		return file_vision;
-	}
-
-	public void setFile_vision(byte[] file_vision) {
-		this.file_vision = file_vision;
-	}
-
-	public byte[] getFile_concepto() {
-		return file_concepto;
-	}
-
-	public void setFile_concepto(byte[] file_concepto) {
-		this.file_concepto = file_concepto;
-	}
-
-	public byte[] getFile_categoria() {
-		return file_categoria;
-	}
-
-	public void setFile_categoria(byte[] file_categoria) {
-		this.file_categoria = file_categoria;
-	}
-
-	@Override
-	public String toString() {
-		return "VisionPersonaQuec [grupoEdad=" + grupoEdad + ", sexo=" + sexo + ", idioma=" + idioma + ", departamento="
-				+ departamento + ", provincia=" + provincia + ", distrito=" + distrito + ", latitud=" + latitud
-				+ ", longitud=" + longitud + ", file_vision=" + Arrays.toString(file_vision) + ", file_concepto="
-				+ Arrays.toString(file_concepto) + ", file_categoria=" + Arrays.toString(file_categoria) + "]";
-	}
-
-*/
-    
 
 }
