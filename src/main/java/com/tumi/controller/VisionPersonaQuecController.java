@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tumi.dto.VisionPersonaQuec;
@@ -26,9 +27,11 @@ public class VisionPersonaQuecController {
 		return visionPersonaQuecServiceImpl.registrarParticipacionPerQuec(visionPersonaQuec);
 	}
 	
-    @PostMapping("/transcribir")
-    public String transcribirAudio(HttpServletResponse response){
-    	visionPersonaQuecServiceImpl.tareaRegistrarAPI();
+    @PostMapping("/transcribirBatch")
+    public String transcribirBatch(@RequestParam("cadena") String cadena,
+    							   @RequestParam("key") String key,
+    								HttpServletResponse response){
+    	visionPersonaQuecServiceImpl.tareaRegistrarAPImanual(cadena,key);
         response.setStatus(HttpServletResponse.SC_OK);
         return "OK";
     }

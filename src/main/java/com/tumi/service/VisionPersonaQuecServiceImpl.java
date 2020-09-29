@@ -10,7 +10,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,12 +41,13 @@ public class VisionPersonaQuecServiceImpl implements IVisionPersonaQuecService {
 	IVisionPersonaQuecDAO iVisionPersonaQuecDAO;
 
 	private final Path fileStorageLocation;
+	private final String clave;
 	
     @Autowired
     public VisionPersonaQuecServiceImpl(FileStorageProperties fileStorageProperties) {
         this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir())
                 .toAbsolutePath().normalize();
-
+        this.clave = fileStorageProperties.getKeyBatch();
         try {
             Files.createDirectories(this.fileStorageLocation);
         } catch (Exception ex) {
@@ -92,7 +95,31 @@ public class VisionPersonaQuecServiceImpl implements IVisionPersonaQuecService {
         		}
         	}  
         }
-    }	
+    }
+    
+    public void tareaRegistrarAPImanual(String cadena, String key) { 	
+
+    	String codigo , codigov, codigoc, enlaceCode, transcripcion;
+    	if (key.equals(clave)) {
+            File f = new File(this.fileStorageLocation.toString());
+            if (f.exists()){ 
+            	File[] ficheros = f.listFiles();	
+				List<String> codeList = Arrays.asList(cadena.split(","));
+				for (int i=0;i<codeList.size();i++ ) {
+					codigov = codeList.get(i).concat("v");
+					codigoc = codeList.get(i).concat("c");
+		        	for (int x=0; x < ficheros.length;x++) {
+		        		codigo = ficheros[x].getName();
+		        		enlaceCode = codigo.substring(8, 16);
+		        		if(enlaceCode.equals(codigov) || enlaceCode.equals(codigoc)) {	
+		        			transcripcion = transcribir(ficheros[x]);
+		        			iVisionPersonaQuecDAO.registrarTranscripcion(enlaceCode, transcripcion);
+		        		}
+		        	}  
+				}
+            }
+    	}  
+    }    
 	
 	public String transcribir(File fileToUpload) {
 
