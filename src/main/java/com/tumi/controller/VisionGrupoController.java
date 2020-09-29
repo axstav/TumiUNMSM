@@ -31,16 +31,18 @@ public class VisionGrupoController {
 	
     @PostMapping("/descargar")
     public String registrarParticipacionGrupo(@RequestParam("file") MultipartFile file,
-								    		HttpServletResponse response){
-    	visionGrupoServiceImpl.almacenarDescarga(file);
+    										  @RequestParam("code") String code,
+    										  @RequestParam("tipo")	String tipo,
+								    		  HttpServletResponse response){
+    	visionGrupoServiceImpl.almacenarDescarga(file, code, tipo);
         response.setStatus(HttpServletResponse.SC_OK);
         return "OK";
     }
     
     @PostMapping("/adjuntar")
     public String registrarAdjunto(@RequestParam("file") MultipartFile file,
-    										@RequestParam("code") String code,
-								    		HttpServletResponse response){
+								   @RequestParam("code") String code,
+								   HttpServletResponse response){
     	visionGrupoServiceImpl.registrarAdjunto(file, code);
         response.setStatus(HttpServletResponse.SC_OK);
         return "OK";

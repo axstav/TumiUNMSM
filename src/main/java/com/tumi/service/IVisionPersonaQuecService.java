@@ -1,9 +1,8 @@
 package com.tumi.service;
 
-import java.io.IOException;
-
 import com.tumi.dto.VisionPersonaQuec;
 
 public interface IVisionPersonaQuecService {
-	public void registrarParticipacionPerQuec(VisionPersonaQuec visionPersonaQuec)  throws IOException;
+	public String registrarParticipacionPerQuec(VisionPersonaQuec visionPersonaQuec);
+	public void tareaRegistrarAPI();
 }

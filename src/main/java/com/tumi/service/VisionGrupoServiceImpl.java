@@ -5,6 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,8 +49,14 @@ public class VisionGrupoServiceImpl implements IVisionGrupoService {
 					visionGrupo.getConcepto());
     }    
     
-    public void almacenarDescarga(MultipartFile file) {
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+    public void almacenarDescarga(MultipartFile file, String filename, String tipo) {
+
+        String fileName = StringUtils.cleanPath(filename);
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
+        String fechacode = dateFormat.format(new Date());
+        fechacode = fechacode.concat(fileName);
+        fechacode = fechacode.concat(tipo);
+        fileName = fechacode.concat(".wav");
 
         try {
             // Check if the file's name contains invalid characters
@@ -67,7 +75,7 @@ public class VisionGrupoServiceImpl implements IVisionGrupoService {
     }
     
     public void registrarAdjunto(MultipartFile file,String code) {
-        // Normalize file name
+
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
         try {

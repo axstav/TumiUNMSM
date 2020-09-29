@@ -4,8 +4,26 @@ import java.math.BigDecimal;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedStoredProcedureQuery;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureParameter;
 
 @Entity
+@NamedStoredProcedureQuery(name = "vision.registrarpersona", 
+procedureName = "sp_registrar_personaQuec", parameters = {
+  @StoredProcedureParameter(mode = ParameterMode.IN, name = "pgrupoEdad", type = String.class),
+  @StoredProcedureParameter(mode = ParameterMode.IN, name = "psexo", type = String.class),
+  @StoredProcedureParameter(mode = ParameterMode.IN, name = "pidioma", type = String.class),
+  @StoredProcedureParameter(mode = ParameterMode.IN, name = "pdepartamento", type = String.class),
+  @StoredProcedureParameter(mode = ParameterMode.IN, name = "pprovincia", type = String.class),
+  @StoredProcedureParameter(mode = ParameterMode.IN, name = "pdistrito", type = String.class),
+  @StoredProcedureParameter(mode = ParameterMode.IN, name = "platitud", type = BigDecimal.class),
+  @StoredProcedureParameter(mode = ParameterMode.IN, name = "plongitud", type = BigDecimal.class),
+  @StoredProcedureParameter(mode = ParameterMode.IN, name = "pfile_vision", type = String.class),
+  @StoredProcedureParameter(mode = ParameterMode.IN, name = "pfile_concepto", type = String.class),
+  @StoredProcedureParameter(mode = ParameterMode.IN, name = "pcategoria", type = String.class),
+  @StoredProcedureParameter(mode = ParameterMode.OUT, name = "puuid", type = String.class)
+  })
 public class VisionPersonaQuec {
 
 	@Id

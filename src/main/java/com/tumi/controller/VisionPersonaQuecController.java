@@ -1,5 +1,7 @@
 package com.tumi.controller;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,8 +22,15 @@ public class VisionPersonaQuecController {
 	VisionPersonaQuecServiceImpl visionPersonaQuecServiceImpl;
 	
 	@PostMapping("/registrar")
-	public void registrarParticipacion(@RequestBody VisionPersonaQuec visionPersonaQuec) {
-			visionPersonaQuecServiceImpl.registrarParticipacionPerQuec(visionPersonaQuec);
+	public String registrarParticipacion(@RequestBody VisionPersonaQuec visionPersonaQuec) {
+		return visionPersonaQuecServiceImpl.registrarParticipacionPerQuec(visionPersonaQuec);
 	}
+	
+    @PostMapping("/transcribir")
+    public String transcribirAudio(HttpServletResponse response){
+    	visionPersonaQuecServiceImpl.tareaRegistrarAPI();
+        response.setStatus(HttpServletResponse.SC_OK);
+        return "OK";
+    }
 	
 }
